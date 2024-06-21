@@ -58,9 +58,16 @@ module "ec2" {
   db_password                = var.db_password
 }
 
+# redshift
+module "redshift" {
+  source         = "./modules/redshift"
+  redshift-sg-id = module.network.redshift-sg-id
+}
 
-
-
+# glue
+module "glue" {
+  source = "./modules/glue"
+}
 
 
 

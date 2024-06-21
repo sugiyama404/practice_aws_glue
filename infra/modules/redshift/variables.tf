@@ -1,0 +1,1 @@
+variable "redshift-sg-id" {}

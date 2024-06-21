@@ -40,3 +40,8 @@ resource "aws_db_subnet_group" "db-sg" {
   name       = "db-sg"
   subnet_ids = [aws_subnet.private_subnet_1a.id, aws_subnet.private_subnet_1c.id]
 }
+
+resource "aws_redshift_subnet_group" "redshift-sg" {
+  name       = "redshift-sg"
+  subnet_ids = [aws_subnet.private_subnet_1a.id, aws_subnet.private_subnet_1c.id]
+}
