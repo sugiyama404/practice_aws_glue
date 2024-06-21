@@ -28,81 +28,39 @@ module "iam" {
   kendra_index_arn = module.kendra.kendra_index_arn
 }
 
-# kendra
-module "kendra" {
-  source          = "./modules/kendra"
-  app_name        = var.app_name
-  s3_bucket_name  = module.s3.s3_bucket_name
-  iam_role_kendra = module.iam.iam_role_kendra
-  s3_bucket_id    = module.s3.s3_bucket_id
-}
-
-# lambda
-module "lambda" {
-  source            = "./modules/lambda"
-  iam_role_lambda   = module.iam.iam_role_lambda
-  app_name          = var.app_name
-  api_execution_arn = module.apigateway.api_execution_arn
-  kendra_index_id   = module.kendra.kendra_index_id
-}
-
-# apigateway
-module "apigateway" {
-  source                  = "./modules/apigateway"
-  lambda_invoke_arn       = module.lambda.lambda_invoke_arn
-  iam_role_lambda         = module.iam.iam_role_lambda
-  region                  = var.region
-  app_name                = var.app_name
-  api_gateway_endpoint_id = module.network.api_gateway_endpoint_id
-}
-
-# ECR
-module "ecr" {
-  source     = "./modules/ecr"
-  image_name = var.image_name
-  app_name   = var.app_name
-}
-
-# BASH
-module "bash" {
-  source     = "./modules/bash"
-  region     = var.region
-  image_name = var.image_name
-}
-
 # network
 module "network" {
   source   = "./modules/network"
   app_name = var.app_name
-  api_port = var.api_port
 }
 
-# ELB
-module "elb" {
-  source                     = "./modules/elb"
+# rds
+module "rds" {
+  source           = "./modules/rds"
+  db_sbg_name      = module.network.db_sbg_name
+  sg_rds_source_id = module.network.sg_rds_source_id
+  db_ports         = var.db_ports
+  app_name         = var.app_name
+  db_name          = var.db_name
+  db_username      = var.db_username
+  db_password      = var.db_password
+}
+
+# opmng
+module "ec2" {
+  source                     = "./modules/ec2"
   app_name                   = var.app_name
-  region                     = var.region
-  api_port                   = var.api_port
-  main_vpc_id                = module.network.main_vpc_id
+  sg_opmng_id                = module.network.sg_opmng_id
   subnet_public_subnet_1a_id = module.network.subnet_public_subnet_1a_id
-  subnet_public_subnet_1c_id = module.network.subnet_public_subnet_1c_id
-  sg_alb_id                  = module.network.sg_alb_id
+  sorce_db_address           = module.rds.sorce_db_address
+  db_username                = var.db_username
+  db_name                    = var.db_name
+  db_password                = var.db_password
 }
 
-# ECS
-module "ecs" {
-  source                      = "./modules/ecs"
-  app_name                    = var.app_name
-  sg_ecs_id                   = module.network.sg_ecs_id
-  subnet_private_subnet_1a_id = module.network.subnet_private_subnet_1a_id
-  subnet_public_subnet_1a_id  = module.network.subnet_public_subnet_1a_id
-  aws_iam_role                = module.iam.iam_role_ecs
-  api_repository_url          = module.ecr.api_repository_url
-  lb_target_group_web_arn     = module.elb.lb_target_group_web_arn
-  api_port                    = var.api_port
-  http_arn                    = module.elb.http_arn
-  api_gateway_endpoint        = module.apigateway.api_gateway_endpoint
-}
+
+
+
 
 
 

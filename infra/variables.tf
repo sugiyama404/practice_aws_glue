@@ -10,14 +10,35 @@ variable "region" {
   default     = "ap-northeast-1"
 }
 
-variable "image_name" {
-  description = "application name"
-  type        = string
-  default     = "chatbot"
+variable "db_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 3306
+      external = 3306
+      protocol = "tcp"
+    }
+  ]
 }
 
-variable "api_port" {
-  description = "api port"
-  type        = number
-  default     = 3000
+variable "db_name" {
+  type        = string
+  description = "database name"
+  default     = "todoproject"
+}
+
+variable "db_username" {
+  type        = string
+  description = "database user name"
+  default     = "rubyruby"
+}
+
+variable "db_password" {
+  type        = string
+  description = "database password"
+  default     = "rubyruby"
 }
