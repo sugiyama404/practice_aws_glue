@@ -34,7 +34,7 @@ module "network" {
   app_name = var.app_name
   db_ports = var.db_ports
 }
-
+/*
 # rds
 module "rds" {
   source                = "./modules/rds"
@@ -58,11 +58,12 @@ module "ec2" {
   db_name                    = var.db_name
   db_password                = var.db_password
 }
-
+*/
 # redshift
 module "redshift" {
   source                     = "./modules/redshift"
   security-group-redshift-id = module.network.security-group-redshift-id
+  redshift-subnet-group-name = module.network.redshift-subnet-group-name
   db_name                    = var.db_name
   db_username                = var.db_username
   db_password                = var.db_password
