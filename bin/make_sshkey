@@ -7,6 +7,7 @@ function make_sshkey() {
   local filename="$2"
 
   cd "${cwd}"
+  mkdir -p "${cwd}/src" && cd "${cwd}/src"
 
   ssh-keygen -t rsa -b 2048 -N "" -f "${filename}" || exit 1
 
@@ -24,8 +25,7 @@ function move_keypair_file() {
 
 function main() {
   local cwd
-  mkdir -p "$(dirname "$0")/../infra/modules/ec2/src"
-  cwd="$(cd "$(dirname "$0")/../infra/modules/ec2/src" && pwd)"
+  cwd="$(cd "$(dirname "$0")/../infra/modules/ec2" && pwd)"
 
   make_sshkey "${cwd}" "todolist-keypair" || exit 1
 }

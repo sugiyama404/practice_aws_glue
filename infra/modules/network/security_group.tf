@@ -30,7 +30,7 @@ resource "aws_security_group" "redshift_sg" {
   name   = "redshift_sg"
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "${var.app_name}-redshift-sg"
+    Name = "${var.app_name}-redshift-subnet-group"
   }
 }
 

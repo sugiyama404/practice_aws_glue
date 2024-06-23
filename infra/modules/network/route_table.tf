@@ -36,12 +36,12 @@ resource "aws_route_table_association" "private_rt_1c" {
   subnet_id      = aws_subnet.private_subnet_1c.id
 }
 
-resource "aws_db_subnet_group" "db-sg" {
+resource "aws_db_subnet_group" "db-subnet-group" {
   name       = "db-sg"
   subnet_ids = [aws_subnet.private_subnet_1a.id, aws_subnet.private_subnet_1c.id]
 }
 
-resource "aws_redshift_subnet_group" "redshift-sg" {
-  name       = "redshift-sg"
+resource "aws_redshift_subnet_group" "redshift-subnet-group" {
+  name       = "redshift-subnet-group"
   subnet_ids = [aws_subnet.private_subnet_1a.id, aws_subnet.private_subnet_1c.id]
 }

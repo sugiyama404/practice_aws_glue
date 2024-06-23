@@ -10,10 +10,10 @@ resource "aws_key_pair" "keypair" {
 resource "aws_instance" "opmng_server" {
   ami                         = data.aws_ami.app.id
   instance_type               = "t2.micro"
-  subnet_id                   = var.subnet_public_subnet_1a_id
+  subnet_id                   = var.subnet-public-subnet-1a-id
   associate_public_ip_address = true
   vpc_security_group_ids = [
-    var.sg_opmng_id
+    var.security-group-opmng-id
   ]
   key_name  = aws_key_pair.keypair.key_name
   user_data = <<EOF
@@ -31,7 +31,7 @@ sleep 500
 
 function connect_mysql() {
   local result
-  result=$(mysql -h${var.sorce_db_address} \
+  result=$(mysql -h${var.db_address} \
   -D${var.db_name} \
   -u${var.db_username} \
   -p${var.db_password} \
@@ -51,7 +51,7 @@ for i in $(seq 1 200); do
   fi
 done
 
-mysql -h${var.sorce_db_address} \
+mysql -h${var.db_address} \
   -D${var.db_name} \
   -u${var.db_username} \
   -p${var.db_password} \
@@ -65,7 +65,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );"
 
-mysql -h${var.sorce_db_address} \
+mysql -h${var.db_address} \
   -D${var.db_name} \
   -u${var.db_username} \
   -p${var.db_password} \

@@ -1,6 +1,6 @@
 variable "app_name" {}
-variable "db_sbg_name" {}
-variable "sg_rds_source_id" {}
+variable "rds-subnet-group-ids" {}
+variable "security-group-rds-id" {}
 variable "db_ports" {}
 variable "db_name" {}
 variable "db_username" {}

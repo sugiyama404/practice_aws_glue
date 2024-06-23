@@ -35,7 +35,7 @@ resource "aws_security_group_rule" "glue_in_tcp65535" {
   from_port         = 0
   to_port           = 65535
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0"]
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.glue_sg.id
 }
 
@@ -44,7 +44,7 @@ resource "aws_security_group_rule" "glue_out_tcp665535" {
   from_port         = 0
   to_port           = 65535
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0"]
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.glue_sg.id
 }
 
@@ -54,7 +54,7 @@ resource "aws_security_group_rule" "redshift_in_tcp65535" {
   from_port         = 5439
   to_port           = 5439
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0"]
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.redshift_sg.id
 }
 
@@ -63,7 +63,7 @@ resource "aws_security_group_rule" "redshift_out_tcp665535" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0"]
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.redshift_sg.id
 }
 

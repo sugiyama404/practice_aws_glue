@@ -17,8 +17,8 @@ resource "aws_db_instance" "source-db" {
 
   multi_az               = false
   availability_zone      = "ap-northeast-1a"
-  db_subnet_group_name   = var.db_sbg_name
-  vpc_security_group_ids = ["${var.sg_rds_source_id}"]
+  db_subnet_group_name   = var.rds-subnet-group-ids
+  vpc_security_group_ids = ["${var.security-group-rds-id}"]
   publicly_accessible    = false
   port                   = var.db_ports[0].external
 

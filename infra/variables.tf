@@ -28,17 +28,17 @@ variable "db_ports" {
 variable "db_name" {
   type        = string
   description = "database name"
-  default     = "todoproject"
+  default     = "newproject"
 }
 
 variable "db_username" {
   type        = string
   description = "database user name"
-  default     = "rubyruby"
+  default     = "MysqlaaaaA"
 }
 
 variable "db_password" {
   type        = string
   description = "database password"
-  default     = "rubyruby"
+  default     = "Mysql1aaaaA"
 }
