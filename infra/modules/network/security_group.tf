@@ -25,12 +25,11 @@ resource "aws_security_group" "glue_sg" {
   }
 }
 
-
 resource "aws_security_group" "redshift_sg" {
-  name   = "redshift_sg"
+  name   = "redshift-sg"
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "${var.app_name}-redshift-subnet-group"
+    Name = "${var.app_name}-redshift-sg"
   }
 }
 

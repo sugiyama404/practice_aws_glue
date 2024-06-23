@@ -34,7 +34,7 @@ variable "db_name" {
 variable "db_username" {
   type        = string
   description = "database user name"
-  default     = "MysqlaaaaA"
+  default     = "admindbuser"
 }
 
 variable "db_password" {

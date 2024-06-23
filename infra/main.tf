@@ -61,11 +61,11 @@ module "ec2" {
 
 # redshift
 module "redshift" {
-  source                   = "./modules/redshift"
-  redshift-subnet-group-id = module.network.redshift-subnet-group-id
-  db_name                  = var.db_name
-  db_username              = var.db_username
-  db_password              = var.db_password
+  source                     = "./modules/redshift"
+  security-group-redshift-id = module.network.security-group-redshift-id
+  db_name                    = var.db_name
+  db_username                = var.db_username
+  db_password                = var.db_password
 }
 
 /*

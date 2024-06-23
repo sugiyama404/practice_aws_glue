@@ -1,9 +1,9 @@
-output "redshift-subnet-group-id" {
-  value = aws_security_group.redshift_sg.id
-}
-
 output "rds-subnet-group-ids" {
   value = aws_db_subnet_group.db-subnet-group.id
+}
+
+output "security-group-redshift-id" {
+  value = aws_security_group.redshift_sg.id
 }
 
 output "security-group-rds-id" {
