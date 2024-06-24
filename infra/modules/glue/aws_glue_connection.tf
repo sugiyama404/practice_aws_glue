@@ -8,6 +8,6 @@ resource "aws_glue_connection" "glue_to_rdb" {
   physical_connection_requirements {
     availability_zone      = var.region
     security_group_id_list = [var.security-group-rds-id]
-    subnet_id              = var.rds-subnet-group-ids[0]
+    subnet_id              = var.subnet-private-subnet-1a-id
   }
 }

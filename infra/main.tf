@@ -71,17 +71,17 @@ module "redshift" {
 
 # glue
 module "glue" {
-  source                    = "./modules/glue"
-  db_name                   = var.db_name
-  db_username               = var.db_username
-  db_password               = var.db_password
-  db_address                = module.rds.db_address
-  rds-subnet-group-ids      = module.network.rds-subnet-group-ids
-  security-group-rds-id     = module.network.security-group-rds-id
-  redshift-endpoint-address = module.redshift.redshift-endpoint-address
-  region                    = var.region
-  s3_bucket_name            = module.s3.s3_bucket_name
-  glue_role_arn             = module.iam.glue_role_arn
+  source                      = "./modules/glue"
+  db_name                     = var.db_name
+  db_username                 = var.db_username
+  db_password                 = var.db_password
+  db_address                  = module.rds.db_address
+  security-group-rds-id       = module.network.security-group-rds-id
+  redshift-endpoint-address   = module.redshift.redshift-endpoint-address
+  subnet-private-subnet-1a-id = module.network.subnet-private-subnet-1a-id
+  region                      = var.region
+  s3_bucket_name              = module.s3.s3_bucket_name
+  glue_role_arn               = module.iam.glue_role_arn
 }
 
 
