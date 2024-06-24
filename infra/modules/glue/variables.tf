@@ -5,3 +5,6 @@ variable "db_address" {}
 variable "region" {}
 variable "rds-subnet-group-ids" {}
 variable "security-group-rds-id" {}
+variable "redshift-endpoint-address" {}
+variable "s3_bucket_name" {}
+variable "glue_role_arn" {}

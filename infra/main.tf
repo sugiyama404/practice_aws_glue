@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 # S3
-/*
+
 module "s3" {
   source   = "./modules/s3"
   app_name = var.app_name
@@ -22,11 +22,10 @@ module "s3" {
 
 # IAM
 module "iam" {
-  source           = "./modules/iam"
-  app_name         = var.app_name
-  region           = var.region
+  source   = "./modules/iam"
+  app_name = var.app_name
+  region   = var.region
 }
-*/
 
 # network
 module "network" {
@@ -34,7 +33,7 @@ module "network" {
   app_name = var.app_name
   db_ports = var.db_ports
 }
-/*
+
 # rds
 module "rds" {
   source                = "./modules/rds"
@@ -58,30 +57,33 @@ module "ec2" {
   db_name                    = var.db_name
   db_password                = var.db_password
 }
-*/
+
 # redshift
 module "redshift" {
   source                     = "./modules/redshift"
   security-group-redshift-id = module.network.security-group-redshift-id
   redshift-subnet-group-name = module.network.redshift-subnet-group-name
+  redshift-subnet-group-id   = module.network.redshift-subnet-group-id
   db_name                    = var.db_name
   db_username                = var.db_username
   db_password                = var.db_password
 }
 
-/*
 # glue
 module "glue" {
-  source                = "./modules/glue"
-  db_name               = var.db_name
-  db_username           = var.db_username
-  db_password           = var.db_password
-  db_address            = module.rds.sorce_db_address
-  rds-subnet-group-ids  = module.network.rds-subnet-group-ids
-  security-group-rds-id = module.network.security-group-rds-id
-  region                = var.region
+  source                    = "./modules/glue"
+  db_name                   = var.db_name
+  db_username               = var.db_username
+  db_password               = var.db_password
+  db_address                = module.rds.db_address
+  rds-subnet-group-ids      = module.network.rds-subnet-group-ids
+  security-group-rds-id     = module.network.security-group-rds-id
+  redshift-endpoint-address = module.redshift.redshift-endpoint-address
+  region                    = var.region
+  s3_bucket_name            = module.s3.s3_bucket_name
+  glue_role_arn             = module.iam.glue_role_arn
 }
 
-*/
+
 
 

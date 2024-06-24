@@ -6,6 +6,10 @@ output "redshift-subnet-group-name" {
   value = aws_redshift_subnet_group.redshift-subnet-group.name
 }
 
+output "redshift-subnet-group-id" {
+  value = aws_redshift_subnet_group.redshift-subnet-group.id
+}
+
 output "security-group-redshift-id" {
   value = aws_security_group.redshift_sg.id
 }

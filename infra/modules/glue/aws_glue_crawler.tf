@@ -1,7 +1,7 @@
 resource "aws_glue_crawler" "my_crawler" {
   name          = "my_crawler"
   database_name = var.db_name
-  role          = "AWSGlueServiceRole"
+  role          = var.glue_role_arn
 
   jdbc_target {
     connection_name = aws_glue_connection.glue_to_rdb.name

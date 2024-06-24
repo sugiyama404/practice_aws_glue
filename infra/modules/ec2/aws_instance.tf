@@ -63,7 +63,8 @@ email VARCHAR(255) DEFAULT NULL,
 password VARCHAR(255) DEFAULT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);"
+);
+"
 
 mysql -h${var.db_address} \
   -D${var.db_name} \
