@@ -18,24 +18,32 @@ job.init(args['JOB_NAME'], args)
 
 # RDS からデータを読み込む
 rds_url = f"jdbc:mysql://{args['RDS_HOST']}:{args['RDS_PORT']}/{args['RDS_DATABASE']}"
-df_rds = spark.read.format("jdbc") \
-    .option("url", rds_url) \
-    .option("driver", "com.mysql.jdbc.Driver") \
-    .option("user", args['RDS_USER']) \
-    .option("password", args['RDS_PASSWORD']) \
-    .option("dbtable", "users") \
-    .load()
+try:
+    df_rds = spark.read.format("jdbc") \
+        .option("url", rds_url) \
+        .option("driver", "com.mysql.cj.jdbc.Driver") \
+        .option("user", args['RDS_USER']) \
+        .option("password", args['RDS_PASSWORD']) \
+        .option("dbtable", "users") \
+        .load()
+except Exception as e:
+    print(f"Failed to read from RDS: {e}")
+    raise
 
 # Redshift にデータを書き込む
 redshift_url = f"jdbc:redshift://{args['REDSHIFT_HOST']}:{args['REDSHIFT_PORT']}/{args['REDSHIFT_DATABASE']}"
-df_rds.write \
-    .format("jdbc") \
-    .option("url", redshift_url) \
-    .option("driver", "com.amazon.redshift.jdbc42.Driver") \
-    .option("user", args['REDSHIFT_USER']) \
-    .option("password", args['REDSHIFT_PASSWORD']) \
-    .option("dbtable", "users") \
-    .mode("append") \
-    .save()
+try:
+    df_rds.write \
+        .format("jdbc") \
+        .option("url", redshift_url) \
+        .option("driver", "com.amazon.redshift.jdbc42.Driver") \
+        .option("user", args['REDSHIFT_USER']) \
+        .option("password", args['REDSHIFT_PASSWORD']) \
+        .option("dbtable", "users") \
+        .mode("append") \
+        .save()
+except Exception as e:
+    print(f"Failed to write to Redshift: {e}")
+    raise
 
 job.commit()

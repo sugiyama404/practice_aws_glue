@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "main" {
-  bucket        = "main-${random_string.s3_unique_key.result}"
+  bucket        = "aws-glue-main-${random_string.s3_unique_key.result}"
   force_destroy = true
   tags = {
     Name = "${var.app_name}-main"

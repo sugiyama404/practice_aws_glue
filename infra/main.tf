@@ -77,6 +77,7 @@ module "glue" {
   db_password                 = var.db_password
   db_address                  = module.rds.db_address
   security-group-rds-id       = module.network.security-group-rds-id
+  security-group-redshift-id  = module.network.security-group-redshift-id
   redshift-endpoint           = module.redshift.redshift-endpoint
   redshift-dns-name           = module.redshift.redshift-dns-name
   subnet-private-subnet-1a-id = module.network.subnet-private-subnet-1a-id

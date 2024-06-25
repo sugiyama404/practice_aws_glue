@@ -4,7 +4,7 @@ resource "aws_glue_crawler" "my_crawler" {
   role          = var.glue_role_arn
 
   jdbc_target {
-    connection_name = aws_glue_connection.glue_to_rdb.name
+    connection_name = aws_glue_connection.rds_to_glue.name
     path            = "${var.db_name}/%"
   }
 
