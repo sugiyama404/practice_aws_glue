@@ -6,7 +6,10 @@ resource "aws_s3_bucket_policy" "allow_access" {
     "Statement": [
         {
             "Effect": "Allow",
-            "Principal": "*",
+            "Sid": "AllowS3Download",
+            "Principal": {
+                "AWS": "arn:aws:iam::${local.account_id}:root"
+            },
             "Action": [
                 "s3:GetObject"
             ],
