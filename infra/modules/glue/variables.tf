@@ -4,6 +4,7 @@ variable "db_password" {}
 variable "db_address" {}
 variable "region" {}
 variable "security-group-rds-id" {}
+variable "security-group-glue-id" {}
 variable "security-group-redshift-id" {}
 variable "redshift-endpoint" {}
 variable "redshift-dns-name" {}
