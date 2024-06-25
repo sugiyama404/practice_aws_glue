@@ -11,7 +11,7 @@ resource "aws_glue_job" "my_glue_job" {
     "--REDSHIFT_DATABASE" = var.db_name
     "--REDSHIFT_USER"     = var.db_username
     "--REDSHIFT_PASSWORD" = var.db_password
-    "--REDSHIFT_HOST"     = var.redshift-endpoint-address
+    "--REDSHIFT_HOST"     = var.redshift-dns-name
     "--REDSHIFT_PORT"     = 5439
     "--RDS_DATABASE"      = var.db_name
     "--RDS_USER"          = var.db_username

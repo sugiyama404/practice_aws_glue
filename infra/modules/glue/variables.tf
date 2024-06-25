@@ -4,7 +4,8 @@ variable "db_password" {}
 variable "db_address" {}
 variable "region" {}
 variable "security-group-rds-id" {}
-variable "redshift-endpoint-address" {}
+variable "redshift-endpoint" {}
+variable "redshift-dns-name" {}
 variable "s3_bucket_name" {}
 variable "glue_role_arn" {}
 variable "subnet-private-subnet-1a-id" {}
