@@ -58,15 +58,32 @@ module "ec2" {
 
 # redshift
 module "redshift" {
-  source         = "./modules/redshift"
-  redshift-sg-id = module.network.redshift-sg-id
+  source                     = "./modules/redshift"
+  security-group-redshift-id = module.network.security-group-redshift-id
+  redshift-subnet-group-name = module.network.redshift-subnet-group-name
+  redshift-subnet-group-id   = module.network.redshift-subnet-group-id
+  db_name                    = var.db_name
+  db_username                = var.db_username
+  db_password                = var.db_password
 }
 
 # glue
 module "glue" {
-  source = "./modules/glue"
+  source                      = "./modules/glue"
+  db_name                     = var.db_name
+  db_username                 = var.db_username
+  db_password                 = var.db_password
+  db_address                  = module.rds.db_address
+  security-group-rds-id       = module.network.security-group-rds-id
+  security-group-glue-id      = module.network.security-group-glue-id
+  security-group-redshift-id  = module.network.security-group-redshift-id
+  redshift-endpoint           = module.redshift.redshift-endpoint
+  redshift-dns-name           = module.redshift.redshift-dns-name
+  subnet-private-subnet-1a-id = module.network.subnet-private-subnet-1a-id
+  region                      = var.region
+  s3_bucket_name              = module.s3.s3_bucket_name
+  glue_role_arn               = module.iam.glue_role_arn
 }
-
 
 
 
