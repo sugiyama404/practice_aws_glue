@@ -1,0 +1,3 @@
+secret:
+  ignored_paths:
+    - "infra/modules/redshift/aws_redshift_cluster.tf"
