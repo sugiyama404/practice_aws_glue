@@ -30,10 +30,13 @@ except Exception as e:
     print(f"Failed to read from RDS: {e}")
     raise
 
+# Select specific columns
+df_selected = df_rds.select("id", "email", "age", "gender", "occupation")
+
 # Redshift にデータを書き込む
 redshift_url = f"jdbc:redshift://{args['REDSHIFT_HOST']}:{args['REDSHIFT_PORT']}/{args['REDSHIFT_DATABASE']}"
 try:
-    df_rds.write \
+    df_selected.write \
         .format("jdbc") \
         .option("url", redshift_url) \
         .option("driver", "com.amazon.redshift.jdbc42.Driver") \

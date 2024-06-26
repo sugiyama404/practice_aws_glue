@@ -11,9 +11,7 @@ terraform {
 provider "aws" {
   region = var.region
 }
-
 # S3
-
 module "s3" {
   source   = "./modules/s3"
   app_name = var.app_name
@@ -86,7 +84,6 @@ module "glue" {
   s3_bucket_name              = module.s3.s3_bucket_name
   glue_role_arn               = module.iam.glue_role_arn
 }
-
 
 
 

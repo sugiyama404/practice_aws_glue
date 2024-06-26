@@ -56,13 +56,16 @@ mysql -h${var.db_address} \
   -u${var.db_username} \
   -p${var.db_password} \
   -e "
-CREATE TABLE IF NOT EXISTS users (
-id INT AUTO_INCREMENT PRIMARY KEY,
-username VARCHAR(255) DEFAULT NULL,
-email VARCHAR(255) DEFAULT NULL,
-password VARCHAR(255) DEFAULT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) DEFAULT NULL,
+    email VARCHAR(100) DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
+    age INT DEFAULT NULL,
+    gender VARCHAR(10) DEFAULT NULL,
+    occupation VARCHAR(100) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 "
 
@@ -71,12 +74,14 @@ mysql -h${var.db_address} \
   -u${var.db_username} \
   -p${var.db_password} \
   -e "
-INSERT INTO users (username, email, password) VALUES
-('alice', 'alice@example.com', 'password123'),
-('bob', 'bob@example.com', 'password456'),
-('charlie', 'charlie@example.com', 'password789'),
-('david', 'david@example.com', 'password012'),
-('eve', 'eve@example.com', 'password345');
+  INSERT INTO users (username, email, password, age, gender, occupation) VALUES
+  ('alice', 'alice@example.com', 'hashed_password1', 25, 'F', 'Engineer'),
+  ('bob', 'bob@example.com', 'hashed_password2', 30, 'M', 'Designer'),
+  ('charlie', 'charlie@example.com', 'hashed_password3', 28, 'M', 'Teacher'),
+  ('david', 'david@example.com', 'hashed_password4', 35, 'M', 'Architect'),
+  ('eva', 'eva@example.com', 'hashed_password5', 22, 'F', 'Student'),
+  ('frank', 'frank@example.com', 'hashed_password6', 40, 'M', 'Manager'),
+  ('grace', 'grace@example.com', 'hashed_password7', 27, 'F', 'Nurse');
 "
 EOF
 
