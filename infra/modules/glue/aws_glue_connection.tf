@@ -6,8 +6,7 @@ resource "aws_glue_connection" "rds_to_glue" {
     "PASSWORD"            = var.db_password
   }
   physical_connection_requirements {
-    availability_zone = "ap-northeast-1a"
-    # security_group_id_list = [var.security-group-rds-id]
+    availability_zone      = "ap-northeast-1a"
     security_group_id_list = [var.security-group-glue-id]
     subnet_id              = var.subnet-private-subnet-1a-id
   }
@@ -21,8 +20,7 @@ resource "aws_glue_connection" "glue_to_redshift" {
     "PASSWORD"          = var.db_password
   }
   physical_connection_requirements {
-    availability_zone = "ap-northeast-1a"
-    # security_group_id_list = [var.security-group-redshift-id]
+    availability_zone      = "ap-northeast-1a"
     security_group_id_list = [var.security-group-glue-id]
     subnet_id              = var.subnet-private-subnet-1a-id
   }

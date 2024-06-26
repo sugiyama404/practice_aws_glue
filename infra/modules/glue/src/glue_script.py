@@ -18,7 +18,6 @@ job.init(args['JOB_NAME'], args)
 
 # RDS からデータを読み込む
 rds_url = f"jdbc:mysql://{args['RDS_HOST']}:{args['RDS_PORT']}/{args['RDS_DATABASE']}"
-print(f"rds_url: {rds_url}")
 try:
     df_rds = spark.read.format("jdbc") \
         .option("url", rds_url) \
@@ -31,12 +30,8 @@ except Exception as e:
     print(f"Failed to read from RDS: {e}")
     raise
 
-print("RDS data:")
-print(df_rds.show())
-
 # Redshift にデータを書き込む
 redshift_url = f"jdbc:redshift://{args['REDSHIFT_HOST']}:{args['REDSHIFT_PORT']}/{args['REDSHIFT_DATABASE']}"
-print(f"redshift_url: {redshift_url}")
 try:
     df_rds.write \
         .format("jdbc") \
