@@ -25,7 +25,7 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --disable mysql80-community
 sudo yum-config-manager --enable mysql57-community
 sudo yum install -y mysql-community-client
-sudo yum install mysql -y
+sudo yum install -y mysql postgresql.x86_64
 
 sleep 500
 

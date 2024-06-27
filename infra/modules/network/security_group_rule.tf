@@ -4,6 +4,7 @@ locals {
     { type = "egress", port = "80" },
     { type = "egress", port = "443" },
     { type = "egress", port = "${var.db_ports[0].internal}" },
+    { type = "egress", port = "5439" },
   ]
 }
 
@@ -65,6 +66,15 @@ resource "aws_security_group_rule" "redshift_in_tcp65535_from_glue" {
   to_port                  = 5439
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.glue_sg.id
+  security_group_id        = aws_security_group.redshift_sg.id
+}
+
+resource "aws_security_group_rule" "redshift_in_tcp65535_from_opmng" {
+  type                     = "ingress"
+  from_port                = 5439
+  to_port                  = 5439
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.opmng_sg.id
   security_group_id        = aws_security_group.redshift_sg.id
 }
 
