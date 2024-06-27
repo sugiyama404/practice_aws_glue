@@ -51,7 +51,6 @@ bin/terraform_apply
 bin/terraform_destroy
 ```
 
-
 # 結果
 
 以下のようにredshiftにtableを作られました。
