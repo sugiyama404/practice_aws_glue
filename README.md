@@ -53,10 +53,78 @@ bin/terraform_destroy
 
 # 結果
 
+## EC2にSSH接続し、MySQLのusersテーブルを確認
+
+まず、EC2インスタンスにSSHで接続します。
+
+```
+cd infra/modules/ec2/src
+ssh -i "todolist-keypair.pem" ec2-user@ec2-xxxxxxxxx.ap-northeast-1.compute.amazonaws.com
+```
+
+次に、MySQLデータベースに接続します。
+
+```
+mysql -h source-db.xxxxxxxxx.ap-northeast-1.rds.amazonaws.com -u admindbuser -pMysql1aaaaA newproject
+```
+
+最後に、usersテーブルの内容を確認します。
+
+```
+select * from users;
+```
+
+<p align="center">
+  <img src="sources/mysql_result.png" alt="animated">
+</p>
+
+
+## Glueのジョブを実行する
+
+AWS Glueのジョブを実行するには、以下の手順に従ってください。
+
+1. AWS Management Consoleにログイン
+2. Glueサービスに移動
+3. 実行したいジョブを選択し、[Run Job]ボタンをクリック
+
+## EC2にSSH接続し、RedShiftのusersテーブルを確認
+
 以下のようにredshiftにtableを作られました。
 
 <p align="center">
   <img src="sources/redshift.png" alt="animated">
 </p>
+
+まず、EC2インスタンスにSSHで接続します。
+
+
+```
+cd infra/modules/ec2/src
+ssh -i "todolist-keypair.pem" ec2-user@ec2-xxxxxxxxx.ap-northeast-1.compute.amazonaws.com
+```
+
+次に、Redshiftクラスターに接続します。
+
+```
+psql -h main-redshift-cluster.xxxxxxxxx.ap-northeast-1.redshift.amazonaws.com -U admindbuser -d newproject -p 5439
+```
+
+最後に、usersテーブルの内容を確認します。
+
+```
+select * from users;
+```
+
+<p align="center">
+  <img src="sources/posgresql_result.png" alt="animated">
+</p>
+
+これらの手順を実行することで、EC2インスタンスからMySQLおよびRedshiftデータベースのusersテーブルにアクセスし、内容を確認することができます。AWS Glueのジョブも簡単に実行することができます。
+
+## Qiita記事
+
+技術詳細はQiitaに記載しています。
+
+[データ分析基盤構築：Terraformを用いたRDS、Glue、Redshiftによるデータ移行](https://qiita.com/sugiyama404/items/3035ebc9d0fda89a0761)
 
 
