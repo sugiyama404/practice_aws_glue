@@ -25,7 +25,7 @@ resource "aws_security_group" "glue_sg" {
   }
 }
 
-
+# SecurityGroup for RedShift
 resource "aws_security_group" "redshift_sg" {
   name   = "redshift-sg"
   vpc_id = aws_vpc.main.id
