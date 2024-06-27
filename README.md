@@ -9,7 +9,7 @@
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?logo=amazon-aws&logoColor=white)
 ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?logo=terraform&logoColor=white)
 
-# はじめに
+# 概要
 本リポジトリは、Terraformを用いてAWS上でデータ分析基盤を構築し、RDSからRedshiftへデータを移行するための手順をまとめたものです。
 
 # 目的
@@ -22,7 +22,7 @@
 + Glue: データ変換とデータロードのためのサーバーレスサービスです。
 + Redshift: データウェアハウスとして、大量データを効率的に処理します。
 
-# 機能
+# 機能一覧
 + Terraformを用いたRDS、Glue、Redshiftの自動構築
 + Glueジョブを用いたRDSからRedshiftへのデータ移行
 + データ移行状況のモニタリング
@@ -52,8 +52,12 @@ bin/terraform_destroy
 ```
 
 
+# 結果
 
+以下のようにredshiftにtableを作られました。
 
-
+<p align="center">
+  <img src="sources/redshift.png" alt="animated">
+</p>
 
 
